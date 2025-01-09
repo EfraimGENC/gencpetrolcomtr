@@ -4,10 +4,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO Meta Etiketleri -->
   <title>Genç Petrol</title>
   <meta name="description" content="Genç Petrol Otomotiv İnşaat Ticaret Limited Şirketi" />
+  <meta name="keywords"
+    content="akaryakıt istasyonu, petrol istasyonu, benzin istasyonu, motorin, benzin, lpg, otomotiv servisi, araç bakım, İstanbul, Eyüp, Göktürk" />
+
+  <!-- Open Graph Meta Etiketleri -->
+  <meta property="og:title" content="Genç Petrol" />
+  <meta property="og:description" content="Genç Petrol Otomotiv İnşaat Ticaret Limited Şirketi" />
+  <!-- <meta property="og:image" content="https://www.gencpetrol.com.tr/images/logo.png" /> -->
+  <meta property="og:url" content="https://www.gencpetrol.com.tr" />
+
+  <!-- Twitter Card Meta Etiketleri -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Genç Petrol" />
+  <meta name="twitter:description" content="Genç Petrol Otomotiv İnşaat Ticaret Limited Şirketi" />
+  <!--<meta name="twitter:image" content="https://www.gencpetrol.com.tr/images/logo.png" /> -->
+
+  <!-- Diğer Meta Etiketleri -->
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Genç Petrol" />
+  <meta name="geo.region" content="TR-34" />
+  <meta name="geo.placename" content="Eyüp" />
+  <meta name="geo.position" content="41.17936401687062;28.88443938946381" />
+  <meta name="ICBM" content="41.17936401687062, 28.88443938946381" />
+
   <link rel="canonical" href="https://www.gencpetrol.com.tr/" />
+  <link rel="alternate" hreflang="tr" href="https://www.gencpetrol.com.tr/" />
+
+  <!-- Bootstrap CSS -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Yapısal Veri -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "GasStation",
+      "name": "Genç Petrol",
+      "image": "https://www.gencpetrol.com.tr/images/logo.png",
+      "description": "Genç Petrol Otomotiv İnşaat Ticaret Limited Şirketi",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Göktürk Merkez Mah. İstanbul Cd. No:36",
+        "addressLocality": "Eyüp",
+        "addressRegion": "İstanbul",
+        "postalCode": "34077",
+        "addressCountry": "TR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 41.17936401687062,
+        "longitude": 28.88443938946381
+      },
+      "telephone": "+902123223131",
+    }
+  </script>
+
+  <!-- CSS -->
   <style>
     .bg-image {
       background-image: url('bg-road.jpg');
@@ -55,6 +110,16 @@
       </div>
     </div>
   </div>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8YZYJ0JX4D"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-8YZYJ0JX4D');
+  </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
 </body>
