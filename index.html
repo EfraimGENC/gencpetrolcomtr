@@ -64,9 +64,14 @@
         "description": "Genç Petrol Otomotiv İnşaat Ticaret Limited Şirketi",
         "telephone": "+902123223131",
         "vatID": "3930332455",
+        "identifier": {
+          "@type": "PropertyValue",
+          "name": "MERSİS",
+          "value": "0393033245500018"
+        },
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Göktürk Merkez Mah. İstanbul Cd. 2.Kayın Sk. No:1 Genç Plaza Kat:2",
+          "streetAddress": "Göktürk Merkez Mah. İstanbul Cd. 2.Kayın Sk. No:1 Genç Plaza Kat:2 Oda No: 201",
           "addressLocality": "Eyüp",
           "addressRegion": "İstanbul",
           "postalCode": "34077",
@@ -780,13 +785,13 @@
               <button
                 type="button"
                 class="row__copy"
-                data-copy="Göktürk Merkez Mah. İstanbul Cd. 2.Kayın Sk. No:1 Genç Plaza Kat:2 Eyüp / İstanbul"
+                data-copy="Göktürk Merkez Mah. İstanbul Cd. 2.Kayın Sk. No:1 Genç Plaza Kat:2 Oda No: 201 Eyüp / İstanbul"
               >
                 <span class="row__text">
                   <span class="row__label" id="label-address">Adres</span>
                   <span class="row__value multi"
                     >Göktürk Merkez Mah. İstanbul Cd. 2.Kayın Sk. No:1 Genç Plaza
-                    Kat:2 Eyüp / İstanbul</span
+                    Kat:2 Oda No: 201 Eyüp / İstanbul</span
                   >
                 </span>
                 <span class="row__icon" aria-hidden="true">
@@ -893,6 +898,47 @@
                 <span class="row__text">
                   <span class="row__label" id="label-taxno">Vergi No</span>
                   <span class="row__value mono">393 033 2455</span>
+                </span>
+                <span class="row__icon" aria-hidden="true">
+                  <span class="row__icon-stack">
+                    <svg
+                      class="ico-copy"
+                      viewBox="0 0 24 24"
+                      width="17"
+                      height="17"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <rect x="9" y="9" width="11" height="11" rx="2.4" />
+                      <path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H15" />
+                    </svg>
+                    <svg
+                      class="ico-check"
+                      viewBox="0 0 24 24"
+                      width="17"
+                      height="17"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M5 12.5l4.2 4.2L19 7" />
+                    </svg>
+                  </span>
+                </span>
+              </button>
+            </li>
+
+            <!-- Mersis No -->
+            <li class="row">
+              <button type="button" class="row__copy" data-copy="0393033245500018">
+                <span class="row__text">
+                  <span class="row__label" id="label-mersis">Mersis No</span>
+                  <span class="row__value mono">0393033245500018</span>
                 </span>
                 <span class="row__icon" aria-hidden="true">
                   <span class="row__icon-stack">
@@ -1126,6 +1172,7 @@
               address: "Adres",
               taxoffice: "Vergi Dairesi",
               taxno: "Vergi No",
+              mersis: "Mersis No",
               phone: "Telefon",
               email: "E-Posta",
             },
@@ -1144,6 +1191,7 @@
               address: "Address",
               taxoffice: "Tax Office",
               taxno: "Tax No.",
+              mersis: "MERSİS No.",
               phone: "Phone",
               email: "E-mail",
             },
@@ -1237,6 +1285,7 @@
           setText("label-address", d.labels.address);
           setText("label-taxoffice", d.labels.taxoffice);
           setText("label-taxno", d.labels.taxno);
+          setText("label-mersis", d.labels.mersis);
           setText("label-phone", d.labels.phone);
           setText("label-email", d.labels.email);
           if (!copiedName) setText("copyname-text", d.copyName);
