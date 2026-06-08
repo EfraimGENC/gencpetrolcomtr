@@ -76,13 +76,26 @@
     <meta name="theme-color" content="#0a1610" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#eef2ea" media="(prefers-color-scheme: light)" />
 
-    <!-- Yazı tipleri -->
+    <!-- Yazı tipleri (non-blocking) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap"
+    />
+    <link
       href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
     <!-- Tema yanıp sönmesini önle: render öncesi data-theme ayarla -->
     <script>
