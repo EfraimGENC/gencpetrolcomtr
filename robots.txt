@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://www.gencpetrol.com.tr/sitemap.xml
