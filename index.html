@@ -429,6 +429,7 @@
         line-height: 0.98;
         letter-spacing: -0.015em;
         color: var(--ink);
+        cursor: pointer;
       }
       .hero__legal {
         margin-top: var(--s-3);
@@ -438,6 +439,11 @@
         color: var(--ink-muted);
         max-width: 26ch;
         text-wrap: balance;
+        cursor: pointer;
+      }
+      .hero__name:hover,
+      .hero__legal:hover {
+        color: var(--accent);
       }
       .hero__copyname {
         margin-top: var(--s-4);
@@ -741,7 +747,7 @@
         <!-- Hero -->
         <section class="hero">
           <p class="hero__eyebrow" id="eyebrow">ŞİRKET KÜNYESİ</p>
-          <h1 class="hero__name">Genç Petrol</h1>
+          <h1 class="hero__name" id="hero-name">Genç Petrol</h1>
           <p class="hero__legal" id="legal">
             Otomotiv İnşaat Ticaret Limited Şirketi
           </p>
@@ -792,11 +798,12 @@
               <button
                 type="button"
                 class="row__copy"
+                id="addr-copy"
                 data-copy="Göktürk Merkez Mah. İstanbul Cd. 2.Kayın Sk. No:1 Genç Plaza Kat:2 Oda No: 201 Eyüp / İstanbul"
               >
                 <span class="row__text">
                   <span class="row__label" id="label-address">Adres</span>
-                  <span class="row__value multi"
+                  <span class="row__value multi" id="addr-value"
                     >Göktürk Merkez Mah. İstanbul Cd. 2.Kayın Sk. No:1 Genç Plaza
                     Kat:2 Oda No: 201 Eyüp / İstanbul</span
                   >
@@ -1164,13 +1171,31 @@
       (function () {
         "use strict";
 
-        var LEGAL_FULL =
-          "Genç Petrol Otomotiv İnşaat Ticaret Limited Şirketi";
+        /* Türkçe kaynak metinler. İngilizce modda çevrilmez;
+           yalnızca Türkçe karakterler İngilizce karşılıklarıyla değişir. */
+        var NAME_TR = "Genç Petrol";
+        var LEGAL_LINE_TR = "Otomotiv İnşaat Ticaret Limited Şirketi";
+        var LEGAL_FULL_TR = NAME_TR + " " + LEGAL_LINE_TR;
+        var ADDRESS_TR =
+          "Göktürk Merkez Mah. İstanbul Cd. 2.Kayın Sk. No:1 Genç Plaza Kat:2 Oda No: 201 Eyüp / İstanbul";
+
+        var TR_ASCII = {
+          ç: "c", Ç: "C", ğ: "g", Ğ: "G", ı: "i", İ: "I",
+          ö: "o", Ö: "O", ş: "s", Ş: "S", ü: "u", Ü: "U",
+        };
+        function toAscii(str) {
+          return str.replace(/[çÇğĞıİöÖşŞüÜ]/g, function (c) {
+            return TR_ASCII[c];
+          });
+        }
+        /* Geçerli dile göre metin: TR aynen, EN Türkçe karakterleri sadeleştirir. */
+        function localize(tr) {
+          return lang === "en" ? toAscii(tr) : tr;
+        }
 
         var I18N = {
           tr: {
             eyebrow: "ŞİRKET KÜNYESİ",
-            legal: "Otomotiv İnşaat Ticaret Limited Şirketi",
             copyName: "Unvanı kopyala",
             copied: "Kopyalandı",
             sectionTitle: "Künye & Fatura Bilgileri",
@@ -1189,7 +1214,6 @@
           },
           en: {
             eyebrow: "COMPANY PROFILE",
-            legal: "Automotive Construction Trade Co. Ltd.",
             copyName: "Copy legal name",
             copied: "Copied",
             sectionTitle: "Company & Billing Details",
@@ -1286,8 +1310,13 @@
           var d = dict();
           document.documentElement.lang = lang;
           setText("eyebrow", d.eyebrow);
-          setText("legal", d.legal);
+          setText("hero-name", localize(NAME_TR));
+          setText("legal", localize(LEGAL_LINE_TR));
           setText("section-title", d.sectionTitle);
+          // Adres: çevrilmez, yalnızca Türkçe karakterler sadeleşir
+          setText("addr-value", localize(ADDRESS_TR));
+          var addrBtn = byId("addr-copy");
+          if (addrBtn) addrBtn.setAttribute("data-copy", localize(ADDRESS_TR));
           setText("hint", d.hint);
           setText("label-address", d.labels.address);
           setText("label-taxoffice", d.labels.taxoffice);
@@ -1412,15 +1441,19 @@
           var copyBtns = document.querySelectorAll(".row__copy");
           for (var i = 0; i < copyBtns.length; i++) bindCopy(copyBtns[i]);
 
-          byId("copyname-btn").addEventListener("click", function () {
-            copyText(LEGAL_FULL).then(function (ok) {
+          function copyLegalName() {
+            copyText(localize(LEGAL_FULL_TR)).then(function (ok) {
               if (!ok) return;
               copiedName = true;
               var b = byId("copyname-btn");
               setText("copyname-text", dict().copied);
               flashCopied(b);
             });
-          });
+          }
+          byId("copyname-btn").addEventListener("click", copyLegalName);
+          // Unvan metnine (başlık ve tüzel ad) dokununca da kopyalansın
+          byId("hero-name").addEventListener("click", copyLegalName);
+          byId("legal").addEventListener("click", copyLegalName);
 
           byId("theme-btn").addEventListener("click", cycleTheme);
           byId("lang-tr").addEventListener("click", function () {
