@@ -6,7 +6,7 @@
  * Sürümü değiştirince (CACHE_VERSION) eski cache temizlenir ve kabuk yeniden
  * yüklenir. İçerik güncellendiğinde bu numarayı artırmak yeterli.
  */
-const CACHE_VERSION = "v1";
+const CACHE_VERSION = "v2";
 const SHELL_CACHE = "gp-shell-" + CACHE_VERSION;
 const FONT_CACHE = "gp-fonts-" + CACHE_VERSION;
 
@@ -24,11 +24,39 @@ const SHELL_ASSETS = [
   "/web-app-manifest-512x512.png",
 ];
 
+/* Redirect bayrağı taşıyan yanıtlar, sayfa gezinmesine sunulduğunda Safari'de
+ * "Response served by service worker has redirections" hatasına yol açar
+ * (ör. apex alan adı www'ye yönlendiriyorsa). Gövdeyi yeni bir Response'a
+ * kopyalayarak bu bayrağı temizleriz. */
+function redirectSafe(response) {
+  if (!response || !response.redirected) return Promise.resolve(response);
+  return response.blob().then(
+    (body) =>
+      new Response(body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers: response.headers,
+      })
+  );
+}
+
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
       .open(SHELL_CACHE)
-      .then((cache) => cache.addAll(SHELL_ASSETS))
+      .then((cache) =>
+        Promise.all(
+          SHELL_ASSETS.map((url) =>
+            fetch(url, { cache: "reload" })
+              .then((response) =>
+                response && response.ok
+                  ? redirectSafe(response).then((clean) => cache.put(url, clean))
+                  : null
+              )
+              .catch(() => null)
+          )
+        )
+      )
       .then(() => self.skipWaiting())
   );
 });
@@ -51,17 +79,21 @@ self.addEventListener("activate", (event) => {
 /* cache'i öncele, ağ yanıtı gelirse arka planda güncelle. */
 function staleWhileRevalidate(cacheName, request, fallbackKey) {
   return caches.open(cacheName).then((cache) =>
-    cache.match(fallbackKey || request, { ignoreSearch: !!fallbackKey }).then((cached) => {
-      const network = fetch(request)
-        .then((response) => {
-          if (response && (response.ok || response.type === "opaque")) {
-            cache.put(fallbackKey || request, response.clone());
-          }
-          return response;
-        })
-        .catch(() => cached);
-      return cached || network;
-    })
+    cache
+      .match(fallbackKey || request, { ignoreSearch: !!fallbackKey })
+      .then((cached) => {
+        const network = fetch(request)
+          .then((response) => {
+            if (response && (response.ok || response.type === "opaque")) {
+              redirectSafe(response.clone()).then((clean) =>
+                cache.put(fallbackKey || request, clean)
+              );
+            }
+            return redirectSafe(response);
+          })
+          .catch(() => cached);
+        return cached || network;
+      })
   );
 }
 
