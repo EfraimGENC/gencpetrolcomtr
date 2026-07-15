@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Univotel Supply — Mahal Suites Ortaklık Notu</title>
+  <style>
+    :root {
+      --ink: #1a1a2e;
+      --muted: #5c5c7a;
+      --accent: #2d4a7a;
+      --accent-light: #e8eef7;
+      --border: #d8dce8;
+      --bg: #f7f8fc;
+      --card: #ffffff;
+      --highlight: #f0f4fa;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto 3rem;
+      background: var(--card);
+      box-shadow: 0 2px 24px rgba(26, 26, 46, 0.08);
+      page-break-after: always;
+    }
+
+    .page-inner {
+      padding: 3rem 3.5rem;
+    }
+
+    .eyebrow {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .eyebrow span {
+      margin: 0 0.35em;
+      color: var(--border);
+    }
+
+    h1 {
+      font-size: 2.4rem;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+      color: var(--ink);
+    }
+
+    h1 .subtitle {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--muted);
+      margin-top: 0.75rem;
+    }
+
+    h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+      color: var(--ink);
+    }
+
+    h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.75rem;
+      color: var(--accent);
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: var(--muted);
+    }
+
+    .intro {
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin: 2rem 0;
+      max-width: 640px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      margin: 2.5rem 0;
+    }
+
+    .stat-card {
+      background: var(--highlight);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .stat-card .number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card .label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .stat-card .note {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.35rem;
+    }
+
+    .footer-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .page-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .page-footer .page-num {
+      color: var(--accent);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 1.5rem 0;
+    }
+
+    .callout {
+      background: var(--accent-light);
+      border-left: 4px solid var(--accent);
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .callout p {
+      color: var(--ink);
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+    .callout strong {
+      color: var(--accent);
+    }
+
+    .channels {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .channels a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .channels a:hover {
+      text-decoration: underline;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .feature-item {
+      padding: 1rem 1.25rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+
+    .feature-item strong {
+      display: block;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+    }
+
+    .feature-item span {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: var(--highlight);
+    }
+
+    td {
+      color: var(--ink);
+    }
+
+    .unit-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin: 2rem 0;
+    }
+
+    .unit-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+
+    .unit-card .type {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .unit-card .name {
+      font-weight: 700;
+      margin: 0.25rem 0 0.5rem;
+    }
+
+    .unit-card .details {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .unit-card .count {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .steps {
+      list-style: none;
+      margin: 1.5rem 0;
+    }
+
+    .steps li {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      align-items: flex-start;
+    }
+
+    .steps .step-num {
+      flex-shrink: 0;
+      width: 2rem;
+      height: 2rem;
+      background: var(--accent);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    .steps .step-content strong {
+      display: block;
+      color: var(--ink);
+      margin-bottom: 0.25rem;
+    }
+
+    .steps .step-content span {
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .bullet-list {
+      list-style: none;
+      margin: 1rem 0;
+    }
+
+    .bullet-list li {
+      position: relative;
+      padding-left: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .bullet-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .contact-block {
+      margin-top: 2.5rem;
+      padding: 2rem;
+      background: var(--highlight);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .contact-block .name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .contact-block .role {
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+
+    .contact-block a {
+      color: var(--accent);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.35rem;
+    }
+
+    .contact-block a:hover {
+      text-decoration: underline;
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .page {
+        box-shadow: none;
+        margin: 0;
+        page-break-after: always;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .page-inner {
+        padding: 2rem 1.5rem;
+      }
+
+      .stats-grid,
+      .two-col,
+      .feature-grid,
+      .unit-cards {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 1.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1: COVER -->
+  <section class="page" id="page-1">
+    <div class="page-inner">
+      <p class="eyebrow">
+        Univotel Supply <span>·</span> Ortaklık &amp; Tedarik Ekibi
+        <span>·</span> Eyüpsultan · Çırçır · Mahal Suites
+      </p>
+
+      <h1>
+        Mahal Suites için
+        <span class="subtitle">ortaklık bilgi notu.</span>
+      </h1>
+
+      <p class="intro">
+        Bu belge, Mahal Suites (mahal.tr) mülk sahibiyle paylaşılmak üzere Univotel Supply ekibi tarafından
+        hazırlanmıştır. 21 dairelik portföyün Univotel talep ağı ve operasyon modeliyle nasıl
+        değerlendirilebileceğine dair bilgi amaçlı bir özet niteliğindedir.
+      </p>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="number">18.000+</div>
+          <div class="label">2025 Yılında Yönetilen Nitelikli Konaklama Talebi</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">30.000+</div>
+          <div class="label">2026 Yılı Talep Projeksiyonu</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">#1</div>
+          <div class="label">İstanbul Öğrenci Konaklamasında En Yüksek Google Ads Bütçesi</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">25M+</div>
+          <div class="label">Son 2 Ayda Instagram + TikTok Toplam Görüntülenme</div>
+          <div class="note">11M+ farklı kişiye ulaşım</div>
+        </div>
+      </div>
+
+      <p class="footer-note">Temmuz 2026 · Univotel Supply Ekibi · Dahili &amp; Ortaklık Amaçlı</p>
+    </div>
+  </section>
+
+  <!-- PAGE 2: KİMLİK & KAPASİTE -->
+  <section class="page" id="page-2">
+    <div class="page-inner">
+      <p class="eyebrow">Univotel Supply <span>·</span> Mahal Suites Ortaklık Notu</p>
+      <h2>Kimlik &amp; Kapasite</h2>
+
+      <h3>Neden Univotel?</h3>
+      <p>
+        Univotel, İstanbul'da öğrenci ve genç profesyonel konaklama talebini uçtan uca yöneten bir talep
+        oluşturma ve yerleştirme platformudur. Aşağıdaki rakamlar, Mahal Suites gibi yeni bir portföyü
+        değerlendirirken elimizdeki talep hacmini ve pazarlama gücünü somut biçimde göstermek için
+        paylaşılmıştır.
+      </p>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="number">18.000+</div>
+          <div class="label">2025'te Ekibimizle Birebir Görüşme Yapmış Talep</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">30.000+</div>
+          <div class="label">2026 Projeksiyonu — ~%65 Büyüme</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">25M+</div>
+          <div class="label">Son 2 Ayda IG + TikTok Toplam Görüntülenme</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">11M+</div>
+          <div class="label">Son 2 Ayda Ulaşılan Farklı Kişi Sayısı</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p>
+          <strong>Sektörde en yüksek dijital pazarlama bütçesi</strong><br>
+          İstanbul öğrenci ve genç profesyonel konaklama sektöründe Google Ads'e en yüksek bütçeyi ayıran oyuncu
+          Univotel'dir. Bu iddiayı görüşme masasında kampanya raporlarımız, arama hacmi verilerimiz ve reklam harcaması
+          karşılaştırmalarımızla somut biçimde gösterebiliriz — soyut bir konumlandırma değil, veriyle desteklenen bir gerçektir.
+        </p>
+      </div>
+
+      <div class="two-col">
+        <div>
+          <h3>"Talep" tanımımız</h3>
+          <p>
+            Rakamlarımızın bu kadar değerli olmasının nedeni tanımı: bir talep, sadece formu dolduran kişi değil,
+            Univotel ekibiyle gerçek bir birebir görüşme yapmış kişidir. Bu nedenle 18.000+ rakamı doğrudan doluluk
+            potansiyeline dönüşen, nitelikli bir havuzu temsil eder.
+          </p>
+        </div>
+        <div>
+          <h3>Sosyal medyada erişim gücü</h3>
+          <p>
+            Instagram ve TikTok kanallarımızın toplamında, son 2 ayda 25 milyonun üzerinde görüntülenme ve 11
+            milyonun üzerinde farklı kişiye ulaşım sağladık. Bu erişim doğrudan Mahal Suites için oluşturacağımız
+            içerik ve reklam trafiğine yansıyacaktır.
+          </p>
+        </div>
+      </div>
+
+      <h3>Kanallarımız</h3>
+      <p>Aşağıdaki kanallar üzerinden aktif olarak talep oluşturuyor ve marka görünürlüğü sağlıyoruz:</p>
+      <div class="channels">
+        <a href="https://univotel.com" target="_blank" rel="noopener">univotel.com</a>
+        <a href="https://instagram.com/univotel" target="_blank" rel="noopener">instagram.com/univotel</a>
+      </div>
+
+      <div class="page-footer">
+        <span>Univotel Supply — Mahal Suites Ortaklık Notu</span>
+        <span class="page-num">02</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 3: MÜLK PROFİLİ -->
+  <section class="page" id="page-3">
+    <div class="page-inner">
+      <p class="eyebrow">Univotel Supply <span>·</span> Mahal Suites Ortaklık Notu</p>
+      <h2>Mülk Profili</h2>
+
+      <h3>Mahal Suites — Eyüpsultan, Çırçır</h3>
+      <p>
+        Çırçır Mh. Atatürk Cd. 179/1, Eyüpsultan/İstanbul adresinde, tamamı kullanıma hazır durumda 21 tam
+        eşyalı daireden oluşan bir portföy. Aşağıda mülkü değerlendirirken çıkardığımız temel notlar yer alıyor.
+      </p>
+
+      <h3>Konfor &amp; donanım öne çıkanlar</h3>
+      <div class="feature-grid">
+        <div class="feature-item">
+          <strong>Yerden Isıtma</strong>
+          <span>Hidronik yerden ısıtma + seramik zemin, merkezi sistem desteğiyle.</span>
+        </div>
+        <div class="feature-item">
+          <strong>Süzme Sayaç (×4)</strong>
+          <span>Elektrik, sıcak su, soğuk su, ısınma — kiracı yalnızca kendi tüketimini öder.</span>
+        </div>
+        <div class="feature-item">
+          <strong>İndüksiyonlu Mutfak</strong>
+          <span>Ocak, fırın, davlumbaz, bulaşık makinesi dahil, tam donanımlı.</span>
+        </div>
+        <div class="feature-item">
+          <strong>Tam Eşyalı</strong>
+          <span>Koltuk, yemek masası, gömme gardırop, TV, mutfak seti — valizle taşınma.</span>
+        </div>
+      </div>
+
+      <h3>Konum &amp; ulaşım</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Nokta</th>
+            <th>Mesafe / Süre</th>
+            <th>Not</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>T5 Alibeyköy Tramvayı</td>
+            <td>~700 m</td>
+            <td>Eminönü–Alibeyköy hattı, düz ayak yürüyüş</td>
+          </tr>
+          <tr>
+            <td>Bilgi Üniversitesi</td>
+            <td>~8 dk</td>
+            <td>santralistanbul kampüsü</td>
+          </tr>
+          <tr>
+            <td>Haliç Üniversitesi</td>
+            <td>~12 dk</td>
+            <td>Tramvay ile aktarmasız</td>
+          </tr>
+          <tr>
+            <td>Bezmialem &amp; Kadir Has</td>
+            <td>~15 dk</td>
+            <td>Haliç koridoru, tek hat</td>
+          </tr>
+          <tr>
+            <td>İstanbul Ticaret Üniversitesi</td>
+            <td>~18 dk</td>
+            <td>T5 hattı boyunca direkt</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout">
+        <p>
+          <strong>Dikkat çeken nokta:</strong> Mahal Suites minimum kiralama süresini 1 yıl olarak uyguluyor ve mevcut sakinleri arasında öğrencinin
+          yanı sıra genç profesyonel ve expat profili de yer alıyor. Bu, standart 9 aylık akademik sezon modelimizden farklı, yıl geneline
+          yayılan bir doluluk stratejisi gerektiriyor — 4. sayfada bunu nasıl ele alacağımızı özetliyoruz.
+        </p>
+      </div>
+
+      <div class="unit-cards">
+        <div class="unit-card">
+          <div class="type">1+1</div>
+          <div class="name">Standart Daire</div>
+          <div class="details">Yatak odası · Oturma alanı · Tam mutfak · Banyo · Yerden ısıtma</div>
+          <div class="count">16 daire</div>
+        </div>
+        <div class="unit-card">
+          <div class="type">1+0</div>
+          <div class="name">Kompakt Stüdyo</div>
+          <div class="details">Açık plan · Kitchenette · Banyo · Tam eşyalı · Yerden ısıtma</div>
+          <div class="count">5 daire</div>
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <span>Univotel Supply — Mahal Suites Ortaklık Notu</span>
+        <span class="page-num">03</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 4: OPERASYON MODELİ -->
+  <section class="page" id="page-4">
+    <div class="page-inner">
+      <p class="eyebrow">Univotel Supply <span>·</span> Mahal Suites Ortaklık Notu</p>
+      <h2>Operasyon Modeli</h2>
+
+      <h3>Süreci nasıl yürüteceğiz</h3>
+      <p>
+        Mahal Suites için önerdiğimiz operasyon modeli, mülk sahibinin hiçbir pazarlama veya operasyonel yük
+        almadan talep havuzumuzdan doğrudan faydalanmasına dayanıyor.
+      </p>
+
+      <h3>Uçtan uca kiracı deneyimi</h3>
+      <ol class="steps">
+        <li>
+          <span class="step-num">1</span>
+          <div class="step-content">
+            <strong>Talep kalifikasyonu</strong>
+            <span>Univotel talep havuzundan gelen adaylar, atadığımız satış temsilcisi tarafından bütçe, üniversite/iş yeri ve konum uyumu açısından değerlendirilir.</span>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <div class="step-content">
+            <strong>Yerinde görüntüleme koordinasyonu</strong>
+            <span>Aday ile Mahal Suites arasındaki randevu, gezdirme ve soru-cevap süreci temsilcimiz tarafından planlanır ve yürütülür.</span>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <div class="step-content">
+            <strong>Sözleşme &amp; taşınma</strong>
+            <span>Sözleşme sürecinden anahtar tesliminin koordinasyonuna kadar temsilcimiz kiracının yanında olur.</span>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">4</span>
+          <div class="step-content">
+            <strong>Yerleşim sonrası takip</strong>
+            <span>İlk dönemdeki sorulara ve olası aksaklıklara karşı temsilcimiz iletişim noktası olmaya devam eder.</span>
+          </div>
+        </li>
+      </ol>
+
+      <div class="two-col">
+        <div>
+          <h3>Pazarlama maliyeti sıfır</h3>
+          <p>
+            Bu ortaklıkta mülk sahibinden pazarlama, reklam ya da listeleme bedeli talep edilmeyecektir. Talep
+            oluşturma, reklam yönetimi ve içerik üretiminin tüm maliyeti Univotel tarafından karşılanır.
+          </p>
+        </div>
+        <div>
+          <h3>Komisyon modeli</h3>
+          <p>
+            Bu belge ilk bilgilendirme amaçlıdır; komisyon/ortaklık yapısı görüşme masasında birlikte
+            netleştirilecektir. 1 yıllık minimum kira süresine uygun bir model üzerinde çalışıyoruz.
+          </p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p>
+          <strong>Model farkı:</strong> Mahal Suites'in 1 yıllık minimum kira politikası, standart akademik sezon modelimizden farklı olarak yıl boyu
+          sürekli doluluk hedefleyen bir yaklaşım gerektiriyor. Bu da bizi hem öğrenci hem de genç profesyonel/expat/kurumsal talebini
+          aynı anda besleyen karma bir strateji kurmaya yönlendiriyor — bir sonraki sayfada bu fırsatı özetliyoruz.
+        </p>
+      </div>
+
+      <div class="page-footer">
+        <span>Univotel Supply — Mahal Suites Ortaklık Notu</span>
+        <span class="page-num">04</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 5: EK FIRSAT -->
+  <section class="page" id="page-5">
+    <div class="page-inner">
+      <p class="eyebrow">Univotel Supply <span>·</span> Mahal Suites Ortaklık Notu</p>
+      <h2>Ek Fırsat</h2>
+
+      <h3>Kurumsal konaklama potansiyeli</h3>
+      <p>
+        Mahal Suites'in 1 yıllık minimum kira yapısı ve mevcut sakin profilindeki genç profesyonel/expat ağırlığı,
+        portföyü yalnızca öğrenci talebiyle sınırlı tutmamak için elverişli bir zemin sunuyor. Çevredeki kurumsal
+        yoğunluğu değerlendirdiğimizde aşağıdaki fırsatları görüyoruz.
+      </p>
+
+      <h3>Çevredeki kurumsal yoğunluk</h3>
+      <ul class="bullet-list">
+        <li>
+          <strong>Kağıthane iş merkezleri:</strong> Papirus Plaza ve çevresindeki plazalarda tekstil, medya ve dış ticaret firmalarının yoğun
+          ofis varlığı — T5 hattıyla dakikalar içinde erişim.
+        </li>
+        <li>
+          <strong>Alibeyköy sanayi-ticaret bölgesi:</strong> Holding merkezleri ve lojistik firmaları için konaklama/relocation ihtiyacı
+          doğurabilecek bir yoğunluk.
+        </li>
+        <li>
+          <strong>Haliç koridoru:</strong> T5 hattı üzerinden Beyoğlu, Eminönü ve Şişli iş bölgelerine aktarmasız erişim, merkezi ofislerde
+          çalışan profesyoneller için pratik bir konaklama seçeneği yaratıyor.
+        </li>
+        <li>
+          <strong>Bilgi Üniversitesi (santralistanbul):</strong> Yalnızca öğrenci değil, misafir öğretim üyesi, araştırmacı ve kurumsal eğitim/
+          program katılımcısı potansiyeli de barındırıyor.
+        </li>
+      </ul>
+
+      <div class="two-col">
+        <div>
+          <h3>Önerimiz</h3>
+          <p>
+            Univotel, öğrenci talep kanalına ek olarak, relocation ajansları ve bölgedeki şirketlerin İK bütçeli kurumsal
+            konaklama ihtiyaçlarına (yeni işe başlayan çalışan, kısa-orta vadeli proje ekibi konaklaması) yönelik ayrı
+            bir talep kanalı açabilir.
+          </p>
+        </div>
+        <div>
+          <h3>Neden değerli?</h3>
+          <p>
+            İkinci bir talep havuzu, özellikle yaz ayları ve dönem arası gibi öğrenci talebinin düştüğü dönemlerde
+            boşluk riskini azaltır ve doluluğu yıl geneline daha dengeli yayar.
+          </p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p>
+          <strong>Sonraki adım:</strong> Bu bölüm ilk gözlemlerimizi özetliyor. Kurumsal konaklama modelinin gelir projeksiyonu ve hedef şirket/ajans
+          listesi, Emre tarafından hazırlanacak detaylı finansal modelleme çalışmasında ayrıca sunulacaktır.
+        </p>
+      </div>
+
+      <div class="page-footer">
+        <span>Univotel Supply — Mahal Suites Ortaklık Notu</span>
+        <span class="page-num">05</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGE 6: SONRAKİ ADIM -->
+  <section class="page" id="page-6">
+    <div class="page-inner">
+      <p class="eyebrow">Univotel Supply <span>·</span> Mahal Suites Ortaklık Notu</p>
+      <h2>Sonraki Adım</h2>
+
+      <h3>Sizden haber bekliyoruz.</h3>
+      <p>
+        Bu belge, Mahal Suites ile ilk bilgilendirme amacıyla hazırlanmıştır. Bir sonraki adım olarak yerinde
+        inceleme, detaylı komisyon/gelir modeli ve kurumsal konaklama projeksiyonunu birlikte netleştirmek
+        isteriz.
+      </p>
+
+      <div class="contact-block">
+        <div class="name">Emre Sefa Kadirhan</div>
+        <div class="role">Univotel Supply &amp; Ortaklıklar</div>
+        <a href="mailto:emre@univotel.com">emre@univotel.com</a>
+        <a href="tel:+905445548344">+90 544 554 83 44</a>
+        <div class="channels" style="margin-top: 1rem;">
+          <a href="https://univotel.com" target="_blank" rel="noopener">univotel.com</a>
+          <a href="https://instagram.com/univotel" target="_blank" rel="noopener">instagram.com/univotel</a>
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <span>Univotel Supply — Dahili &amp; Ortaklık Amaçlı Belge</span>
+        <span class="page-num">06</span>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
