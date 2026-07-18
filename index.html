@@ -645,6 +645,50 @@
         display: inline-flex;
       }
 
+      /* ---------------- Tümünü kopyala ---------------- */
+      .copyall {
+        margin-top: var(--s-3);
+        width: 100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font: inherit;
+        font-size: 13.5px;
+        font-weight: 600;
+        color: var(--ink);
+        background: var(--surface-2);
+        border: 1px solid var(--line);
+        border-radius: var(--r-md);
+        padding: 13px var(--s-4);
+        cursor: pointer;
+        transition: border-color 0.2s ease, background 0.18s ease,
+          color 0.2s ease, transform 0.12s ease;
+      }
+      .copyall:hover {
+        border-color: var(--line-strong);
+        background: var(--row-hover);
+      }
+      .copyall:active {
+        transform: scale(0.992);
+      }
+      .copyall__icon {
+        display: inline-flex;
+        align-items: center;
+        color: var(--ink-faint);
+        transition: color 0.2s ease;
+      }
+      .copyall:hover .copyall__icon {
+        color: var(--ink-muted);
+      }
+      .copyall.is-copied {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+      .copyall.is-copied .copyall__icon {
+        color: var(--accent);
+      }
+
       /* ---------------- Foot ---------------- */
       .foot {
         margin-top: clamp(22px, 6vw, 30px);
@@ -1117,7 +1161,111 @@
                 </svg>
               </a>
             </li>
+
+            <!-- Web -->
+            <li class="row">
+              <button
+                type="button"
+                class="row__copy"
+                id="web-copy"
+                data-copy="https://gencpetrol.com.tr"
+              >
+                <span class="row__text">
+                  <span class="row__label" id="label-web">Web</span>
+                  <span class="row__value">gencpetrol.com.tr</span>
+                </span>
+                <span class="row__icon" aria-hidden="true">
+                  <span class="row__icon-stack">
+                    <svg
+                      class="ico-copy"
+                      viewBox="0 0 24 24"
+                      width="17"
+                      height="17"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <rect x="9" y="9" width="11" height="11" rx="2.4" />
+                      <path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H15" />
+                    </svg>
+                    <svg
+                      class="ico-check"
+                      viewBox="0 0 24 24"
+                      width="17"
+                      height="17"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="M5 12.5l4.2 4.2L19 7" />
+                    </svg>
+                  </span>
+                </span>
+              </button>
+              <a
+                class="row__act"
+                id="act-web"
+                href="https://gencpetrol.com.tr"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Siteye git"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="16"
+                  height="16"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M14 4h6v6" />
+                  <path d="M20 4 10.5 13.5" />
+                  <path d="M19 14v4.5A2.5 2.5 0 0 1 16.5 21h-9A2.5 2.5 0 0 1 5 18.5v-9A2.5 2.5 0 0 1 7.5 7H12" />
+                </svg>
+              </a>
+            </li>
           </ul>
+
+          <!-- Tüm bilgileri tek seferde kopyala -->
+          <button type="button" class="copyall" id="copyall-btn">
+            <span class="copyall__icon" aria-hidden="true">
+              <svg
+                class="ico-copy"
+                viewBox="0 0 24 24"
+                width="17"
+                height="17"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="9" y="9" width="11" height="11" rx="2.4" />
+                <path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H15" />
+              </svg>
+              <svg
+                class="ico-check"
+                viewBox="0 0 24 24"
+                width="17"
+                height="17"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M5 12.5l4.2 4.2L19 7" />
+              </svg>
+            </span>
+            <span id="copyall-text">Tüm bilgileri kopyala</span>
+          </button>
         </section>
 
         <!-- Alt bilgi -->
@@ -1198,6 +1346,7 @@
             eyebrow: "ŞİRKET KÜNYESİ",
             copyName: "Unvanı kopyala",
             copied: "Kopyalandı",
+            copyAll: "Tüm bilgileri kopyala",
             sectionTitle: "Künye & Fatura Bilgileri",
             hint: "Kopyalamak için herhangi bir bilgiye dokunun",
             labels: {
@@ -1207,8 +1356,14 @@
               mersis: "Mersis No",
               phone: "Telefon",
               email: "E-Posta",
+              web: "Web",
             },
-            act: { address: "Yol tarifi", phone: "Ara", email: "Gönder" },
+            act: {
+              address: "Yol tarifi",
+              phone: "Ara",
+              email: "Gönder",
+              web: "Siteye git",
+            },
             themeName: { system: "Otomatik", light: "Açık", dark: "Koyu" },
             themePrefix: "Tema: ",
           },
@@ -1216,6 +1371,7 @@
             eyebrow: "COMPANY PROFILE",
             copyName: "Copy legal name",
             copied: "Copied",
+            copyAll: "Copy all details",
             sectionTitle: "Company & Billing Details",
             hint: "Tap any field to copy it",
             labels: {
@@ -1225,8 +1381,14 @@
               mersis: "MERSİS No.",
               phone: "Phone",
               email: "E-mail",
+              web: "Web",
             },
-            act: { address: "Directions", phone: "Call", email: "Send" },
+            act: {
+              address: "Directions",
+              phone: "Call",
+              email: "Send",
+              web: "Open website",
+            },
             themeName: { system: "System", light: "Light", dark: "Dark" },
             themePrefix: "Theme: ",
           },
@@ -1324,7 +1486,9 @@
           setText("label-mersis", d.labels.mersis);
           setText("label-phone", d.labels.phone);
           setText("label-email", d.labels.email);
+          setText("label-web", d.labels.web);
           if (!copiedName) setText("copyname-text", d.copyName);
+          if (!copiedAll) setText("copyall-text", d.copyAll);
           setText("toast-text", d.copied);
           // İkincil eylem aria etiketleri
           var aa = byId("act-address");
@@ -1333,6 +1497,8 @@
           if (ap) ap.setAttribute("aria-label", d.act.phone);
           var ae = byId("act-email");
           if (ae) ae.setAttribute("aria-label", d.act.email);
+          var aw = byId("act-web");
+          if (aw) aw.setAttribute("aria-label", d.act.web);
           // Dil düğmeleri
           byId("lang-tr").classList.toggle("is-on", lang === "tr");
           byId("lang-en").classList.toggle("is-on", lang === "en");
@@ -1389,6 +1555,7 @@
 
         var copyTimer = null;
         var copiedName = false;
+        var copiedAll = false;
         function flashCopied(el) {
           el.classList.add("is-copied");
           showToast();
@@ -1398,7 +1565,9 @@
             for (var i = 0; i < copied.length; i++)
               copied[i].classList.remove("is-copied");
             copiedName = false;
+            copiedAll = false;
             setText("copyname-text", dict().copyName);
+            setText("copyall-text", dict().copyAll);
           }, 1700);
         }
 
@@ -1454,6 +1623,30 @@
           // Unvan metnine (başlık ve tüzel ad) dokununca da kopyalansın
           byId("hero-name").addEventListener("click", copyLegalName);
           byId("legal").addEventListener("click", copyLegalName);
+
+          // Tüm bilgileri tek metinde topla (WhatsApp vb. için)
+          function buildAllText() {
+            var lines = [localize(LEGAL_FULL_TR), ""];
+            var rows = document.querySelectorAll(".rows .row");
+            for (var i = 0; i < rows.length; i++) {
+              var b = rows[i].querySelector(".row__copy");
+              var lbl = rows[i].querySelector(".row__label");
+              if (!b || !lbl) continue;
+              var val = b.getAttribute("data-copy") || "";
+              if (!val) continue;
+              lines.push(lbl.textContent + ": " + val);
+            }
+            return lines.join("\n");
+          }
+          byId("copyall-btn").addEventListener("click", function () {
+            copyText(buildAllText()).then(function (ok) {
+              if (!ok) return;
+              copiedAll = true;
+              var b = byId("copyall-btn");
+              setText("copyall-text", dict().copied);
+              flashCopied(b);
+            });
+          });
 
           byId("theme-btn").addEventListener("click", cycleTheme);
           byId("lang-tr").addEventListener("click", function () {
