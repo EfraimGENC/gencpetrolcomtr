@@ -1168,11 +1168,11 @@
                 type="button"
                 class="row__copy"
                 id="web-copy"
-                data-copy="https://gencpetrol.com.tr"
+                data-copy="https://www.gencpetrol.com.tr"
               >
                 <span class="row__text">
                   <span class="row__label" id="label-web">Web</span>
-                  <span class="row__value">gencpetrol.com.tr</span>
+                  <span class="row__value">www.gencpetrol.com.tr</span>
                 </span>
                 <span class="row__icon" aria-hidden="true">
                   <span class="row__icon-stack">
@@ -1209,7 +1209,7 @@
               <a
                 class="row__act"
                 id="act-web"
-                href="https://gencpetrol.com.tr"
+                href="https://www.gencpetrol.com.tr"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Siteye git"
@@ -1624,9 +1624,13 @@
           byId("hero-name").addEventListener("click", copyLegalName);
           byId("legal").addEventListener("click", copyLegalName);
 
-          // Tüm bilgileri tek metinde topla (WhatsApp vb. için)
+          // Tüm bilgileri tek metinde topla (WhatsApp vb. için).
+          // WhatsApp biçimi: *kalın* marka adı ve *kalın* alan başlıkları.
           function buildAllText() {
-            var lines = [localize(LEGAL_FULL_TR), ""];
+            var lines = [
+              "*" + localize(NAME_TR) + "* " + localize(LEGAL_LINE_TR),
+              "",
+            ];
             var rows = document.querySelectorAll(".rows .row");
             for (var i = 0; i < rows.length; i++) {
               var b = rows[i].querySelector(".row__copy");
@@ -1634,7 +1638,7 @@
               if (!b || !lbl) continue;
               var val = b.getAttribute("data-copy") || "";
               if (!val) continue;
-              lines.push(lbl.textContent + ": " + val);
+              lines.push("*" + lbl.textContent + ":* " + val);
             }
             return lines.join("\n");
           }
